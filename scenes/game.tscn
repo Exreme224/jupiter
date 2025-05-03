@@ -1,19 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0i6p2flp3xiy"]
+[gd_scene load_steps=9 format=3 uid="uid://b0i6p2flp3xiy"]
 
 [ext_resource type="Texture2D" uid="uid://cdkws8gh50xrq" path="res://assets/box.png" id="1_vny8x"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_s4bbx"]
+[ext_resource type="Script" path="res://scripts/PlatformHandler.gd" id="3_8bkm8"]
+[ext_resource type="Script" path="res://scripts/Platform.gd" id="3_bwdbp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bb86m"]
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6txi4"]
-size = Vector2(128, 9)
+size = Vector2(1000, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7bxl"]
+size = Vector2(1002, 17)
+
+[sub_resource type="Environment" id="Environment_chnwm"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
 
 [node name="Game" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(37, 609)
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(368, 604)
 collision_layer = 3
-collision_mask = 3
 script = ExtResource("2_s4bbx")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -28,16 +38,40 @@ texture = ExtResource("1_vny8x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_bb86m")
 
-[node name="Area2D" type="StaticBody2D" parent="."]
-position = Vector2(16, 649)
-collision_layer = 3
-collision_mask = 3
+[node name="Platforms" type="Node2D" parent="."]
+script = ExtResource("3_8bkm8")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-position = Vector2(48, -2.5)
-scale = Vector2(4, 0.28125)
+[node name="Ground" type="StaticBody2D" parent="Platforms"]
+position = Vector2(16, 788)
+collision_layer = 3
+collision_mask = 0
+script = ExtResource("3_bwdbp")
+words = Array[String](["FUCK", "BITCH"])
+color = Color(0.188235, 1, 0.643137, 1)
+
+[node name="Label" type="Label" parent="Platforms/Ground"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Ground"]
+self_modulate = Color(1.2, 1.2, 1.2, 1)
+position = Vector2(327, -2.5)
+scale = Vector2(31.25, 0.28125)
 texture = ExtResource("1_vny8x")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(48, -2.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Ground"]
+visible = false
+position = Vector2(327.09, -2.5)
 shape = SubResource("RectangleShape2D_6txi4")
+
+[node name="Area2D" type="Area2D" parent="Platforms/Ground"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Ground/Area2D"]
+visible = false
+position = Vector2(329, -6.5)
+shape = SubResource("RectangleShape2D_l7bxl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_chnwm")
+
+[connection signal="body_entered" from="Platforms/Ground/Area2D" to="Platforms/Ground" method="_on_area_2d_body_entered"]

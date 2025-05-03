@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 
 func _handle_movement(delta: float) -> void:
 	var input_dir := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-
+	
 	if input_dir != 0:
 		self.velocity.x = lerp(self.velocity.x, input_dir * move_speed, acceleration * delta)
 	else:
