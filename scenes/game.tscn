@@ -15,6 +15,7 @@ position = Vector2(37, 609)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("2_s4bbx")
+number_of_jumps = 5
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -50)
@@ -41,3 +42,4 @@ texture = ExtResource("1_vny8x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(48, -2.5)
 shape = SubResource("RectangleShape2D_6txi4")
+one_way_collision = true
