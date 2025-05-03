@@ -39,6 +39,24 @@ texture = ExtResource("1_vny8x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_bb86m")
 
+[node name="ProgressBar" type="ProgressBar" parent="Player"]
+offset_left = 17.0
+offset_top = -15.0
+offset_right = 21.0
+offset_bottom = 12.0
+scale = Vector2(1, 1.12359)
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
+[node name="RayCastLeft" type="RayCast2D" parent="Player"]
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+
+[node name="RayCastRight" type="RayCast2D" parent="Player"]
+rotation = -1.5708
+scale = Vector2(0.6, 0.6)
+
 [node name="Platforms" type="Node2D" parent="."]
 script = ExtResource("3_8bkm8")
 
