@@ -31,6 +31,7 @@ texture = ExtResource("2_80rgm")
 visible = false
 position = Vector2(327.09, -2.5)
 shape = SubResource("RectangleShape2D_6txi4")
+one_way_collision = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
