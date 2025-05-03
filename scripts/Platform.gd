@@ -29,7 +29,7 @@ func _on_area_2d_body_entered(body):
 		
 		# Wait up to 0.2 seconds for a solid grounded state
 		var grounded := false
-		for i in range(12):  # ~0.2 seconds at 60fps
+		for i in range(15):  # ~0.2 seconds at 60fps
 			await get_tree().physics_frame
 			if player.is_on_floor():
 				grounded = true
