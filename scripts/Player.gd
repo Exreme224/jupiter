@@ -25,7 +25,6 @@ func _physics_process(delta: float) -> void:
 	if not was_on_floor and is_on_floor():
 		jumps_left = number_of_jumps
 		
-
 func _handle_movement(delta: float) -> void:
 	var input_dir := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	
