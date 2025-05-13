@@ -15,7 +15,6 @@ var was_on_floor = false
 var velocity_locked = false
 var is_near_wall = false
 
-
 func _ready() -> void:
 	original_collision_mask = collision_mask
 	jump_bar.value = 100 / number_of_jumps
